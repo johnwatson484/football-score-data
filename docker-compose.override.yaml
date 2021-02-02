@@ -1,11 +1,10 @@
 version: '3.7'
 services:
-  hapi-template:
+  football-score-api:
     build:
       context: .
       target: development
     ports:
-      - "3000:3000"
       - "9229:9229"
     volumes:
       - ./app/:/home/node/app/

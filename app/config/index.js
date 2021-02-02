@@ -3,16 +3,16 @@ const envs = ['development', 'test', 'production']
 
 // Define config schema
 const schema = joi.object().keys({
-  port: joi.number().default(3000),
   env: joi.string().valid(...envs).default(envs[0]),
-  appName: joi.string()
+  apiHost: joi.string().default('v3.football.api-sports.io'),
+  apiKey: joi.string()
 })
 
 // Build config
 const config = {
-  port: process.env.PORT,
   env: process.env.NODE_ENV,
-  appName: 'Hapi Template'
+  apiHost: process.env.SCORE_API_HOST,
+  apiKey: process.env.SCORE_API_KEY
 }
 
 // Validate config
