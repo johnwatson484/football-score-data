@@ -4,7 +4,7 @@ const envs = ['development', 'test', 'production']
 // Define config schema
 const schema = joi.object().keys({
   env: joi.string().valid(...envs).default(envs[0]),
-  apiHost: joi.string().default('v3.football.api-sports.io'),
+  apiHost: joi.string().default('api-football-v1.p.rapidapi.com'),
   apiKey: joi.string()
 })
 

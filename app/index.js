@@ -11,7 +11,7 @@ const headers = {
 const getResults = async () => {
   return axios({
     method: 'GET',
-    url: `https://${config.apiHost}/fixtures`,
+    url: `https://${config.apiHost}/v2/fixtures/date/2020-02-06`,
     headers
   })
 }
