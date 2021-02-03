@@ -4,8 +4,27 @@ services:
     build:
       context: .
       target: development
+    depends_on:
+      - kafka
     ports:
       - "9229:9229"
     volumes:
       - ./app/:/home/node/app/
       - ./package.json:/home/node/package.json
+
+  zookeeper:
+    ports:
+      - "2181:2181"
+    
+  kafka:
+    ports:
+      - "9092:9092"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    ports:
+      - 9000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:29092
+    depends_on:
+      - kafka
