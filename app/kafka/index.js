@@ -1,22 +1,26 @@
+const config = require('../config').kafka
 const { Kafka, CompressionTypes, logLevel } = require('kafkajs')
-
-const host = process.env.HOST_IP || 'kafka'
 
 const kafka = new Kafka({
   logLevel: logLevel.DEBUG,
-  brokers: [`${host}:9092`],
+  brokers: [`${config.host}:${config.port}`],
   clientId: 'football-score-data'
 })
 
-const topic = 'results'
+const topic = config.topic
 const producer = kafka.producer()
 
 const sendEvent = async (value) => {
+  value = serializeEvent(value)
   await producer.send({
     topic,
     compression: CompressionTypes.GZIP,
     messages: [{ value }]
   })
+}
+
+const serializeEvent = (value) => {
+  return JSON.stringify(value)
 }
 
 const start = async () => {

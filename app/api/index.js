@@ -1,20 +1,20 @@
 const axios = require('axios')
-const config = require('../config')
+const config = require('../config').api
 
 const headers = {
   'content-type': 'application/octet-stream',
-  'x-rapidapi-host': config.apiHost,
-  'x-rapidapi-key': config.apiKey,
+  'x-rapidapi-host': config.host,
+  'x-rapidapi-key': config.key,
   useQueryString: true
 }
 
 const getResults = async () => {
   const results = await axios({
     method: 'GET',
-    url: `https://${config.apiHost}/v2/fixtures/date/2020-02-06`,
+    url: `https://${config.host}/v2/fixtures/date/2020-02-06`,
     headers
   })
-  return results.data.api
+  return results.data.api.fixtures
 }
 
 module.exports = getResults

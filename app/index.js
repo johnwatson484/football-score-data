@@ -1,7 +1,12 @@
 (async function () {
   const getResults = require('./api')
-  const event = require('./events')
+  const kafka = require('./kafka')
 
   const results = await getResults()
-  console.log(results)
+
+  if (results) {
+    await kafka.start()
+    Promise.all(results.map(kafka.sendEvent))
+    await kafka.stop()
+  }
 }())

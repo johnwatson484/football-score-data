@@ -1,26 +1,15 @@
-const joi = require('joi')
-const envs = ['development', 'test', 'production']
-
-// Define config schema
-const schema = joi.object().keys({
-  env: joi.string().valid(...envs).default(envs[0]),
-  apiHost: joi.string().default('api-football-v1.p.rapidapi.com'),
-  apiKey: joi.string()
-})
-
-// Build config
 const config = {
   env: process.env.NODE_ENV,
-  apiHost: process.env.SCORE_API_HOST,
-  apiKey: process.env.SCORE_API_KEY
+  api: {
+    host: process.env.SCORE_API_HOST || 'api-football-v1.p.rapidapi.com',
+    key: process.env.SCORE_API_KEY
+  },
+  kafka: {
+    host: process.env.KAFKA_HOST || 'kafka',
+    port: process.env.KAFKA_PORT || 29092,
+    clientId: process.env.KAFKA_CLIENT_ID || 'football-score-data',
+    topic: process.env.KAFKA_TOPIC || 'results'
+  }
 }
 
-// Validate config
-const { error, value } = schema.validate(config)
-
-// Throw if config is invalid
-if (error) {
-  throw new Error(`The server config is invalid. ${error.message}`)
-}
-
-module.exports = value
+module.exports = config
