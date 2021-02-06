@@ -1,5 +1,5 @@
-# Hapi Template
-Quick start new Node.js project using Hapi.js.
+# Football Score Data
+Publish results to Kafka
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ Either:
 - Docker Compose
 
 Or:
-- Node 12+
+- Node 14+
 
 ## Running application
 ### Docker
