@@ -1,9 +1,9 @@
 version: '3.7'
 services:
-  football-score-api:
+  football-score-data:
     build: .
-    image: football-score-api
-    container_name: football-score-api
+    image: football-score-data
+    container_name: football-score-data
     environment:
       SCORE_API_KEY: ${SCORE_API_KEY}
 
