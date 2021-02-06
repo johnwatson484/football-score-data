@@ -4,7 +4,12 @@ const { Kafka, CompressionTypes, logLevel } = require('kafkajs')
 const kafka = new Kafka({
   logLevel: logLevel.DEBUG,
   brokers: [`${config.host}:${config.port}`],
-  clientId: 'football-score-data'
+  clientId: 'football-score-data',
+  sasl: {
+    mechanism: config.mechanism,
+    username: config.username,
+    password: config.password
+  }
 })
 
 const topic = config.topic

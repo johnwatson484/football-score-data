@@ -15,6 +15,7 @@ USER node
 WORKDIR /home/node
 COPY --chown=node:node package*.json ./
 RUN npm install --production=false
+COPY --chown=node:node ./scripts/ ./scripts/
 COPY --chown=node:node . .
 CMD [ "npm", "run", "start:watch" ]
 

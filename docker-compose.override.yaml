@@ -4,15 +4,23 @@ services:
     build:
       context: .
       target: development
+    command: >
+      sh -c "
+        scripts/wait-for kafka:9093 --
+        npm run start:watch"
     depends_on:
       - kafka
     ports:
       - "9229:9229"
+    environment:
+      KAFKA_CLIENT_USER: kafka
+      KAFKA_CLIENT_PASSWORD: kafka
     volumes:
       - ./app/:/home/node/app/
       - ./package.json:/home/node/package.json
 
   zookeeper:
+    tmpfs: "/datalog"
     ports:
       - "2181:2181"
     
@@ -25,6 +33,6 @@ services:
     ports:
       - 9000:9000
     environment:
-      KAFKA_BROKERCONNECT: kafka:29092
+      KAFKA_BROKERCONNECT: kafka:9092
     depends_on:
       - kafka
