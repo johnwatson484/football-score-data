@@ -9,7 +9,7 @@ const config = {
     port: process.env.KAFKA_PORT || 9093,
     username: process.env.KAFKA_CLIENT_USER,
     password: process.env.KAFKA_CLIENT_PASSWORD,
-    mechanism: process.env.KAFKA_MECHANISM || 'plain',
+    mechanism: process.env.KAFKA_MECHANISM || 'scram-sha-256',
     clientId: process.env.KAFKA_CLIENT_ID || 'football-score-data',
     topic: process.env.KAFKA_TOPIC || 'results'
   }
